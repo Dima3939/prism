@@ -17,9 +17,9 @@ onMounted(() => {
   const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 } })
 
   tl.from('.hero-line-1, .hero-line-2, .hero-line-3', {
-    y: 70,
+    y: 60,
     opacity: 0,
-    rotateX: -15,
+    rotateX: -12,
     stagger: 0.1,
     delay: 0.1
   })
@@ -46,25 +46,25 @@ function onExploreClick() {
       <span>TOP SPACING</span>
     </div>
 
-    <!-- Massive 3-Row Backdrop Typography -->
+    <!-- Wide Modern Geometric Typography (Syne Font - No Squishing) -->
     <div class="backdrop-layer w-full text-center my-auto pointer-events-none flex flex-col justify-center items-center select-none space-y-1 sm:space-y-2">
       <!-- Line 1: PRISM CREATIVE STUDIO -->
       <div class="w-full overflow-hidden flex justify-center">
-        <h1 class="hero-line-1 whitespace-nowrap text-[6.2vw] lg:text-[6.8vw] font-condensed font-black uppercase tracking-tight leading-none text-[#F4F4F0] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
+        <h1 class="hero-line-1 whitespace-nowrap text-[4.8vw] lg:text-[5.4vw] font-display font-extrabold uppercase tracking-tight leading-[0.95] text-[#F4F4F0] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
           PRISM CREATIVE STUDIO
         </h1>
       </div>
 
       <!-- Line 2: DIGITAL EXPERIENCE -->
       <div class="w-full overflow-hidden flex justify-center">
-        <h2 class="hero-line-2 whitespace-nowrap text-[6.8vw] lg:text-[7.4vw] font-condensed font-black uppercase tracking-tight leading-none text-[#E8E8E3] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
+        <h2 class="hero-line-2 whitespace-nowrap text-[5.2vw] lg:text-[5.8vw] font-display font-extrabold uppercase tracking-tight leading-[0.95] text-[#E8E8E3] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
           DIGITAL EXPERIENCE
         </h2>
       </div>
 
       <!-- Line 3: & WEBGL ATELIER -->
       <div class="w-full overflow-hidden flex justify-center">
-        <p class="hero-line-3 whitespace-nowrap text-[6.0vw] lg:text-[6.6vw] font-condensed font-black uppercase tracking-tight leading-none text-[#E8E8E3] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
+        <p class="hero-line-3 whitespace-nowrap text-[4.5vw] lg:text-[5.1vw] font-display font-extrabold uppercase tracking-tight leading-[0.95] text-[#E8E8E3] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
           & WEBGL ATELIER
         </p>
       </div>
@@ -85,7 +85,7 @@ function onExploreClick() {
         <!-- WORKS block -->
         <div class="text-left space-y-0.5">
           <div class="flex items-center gap-2">
-            <span class="text-xs font-condensed font-bold tracking-wider text-white uppercase">WORKS</span>
+            <span class="text-xs font-display font-bold tracking-wider text-white uppercase">WORKS</span>
             <span class="text-[10px] font-mono text-prism-cyan font-bold">70%</span>
           </div>
           <p class="text-[10px] sm:text-[11px] font-mono text-zinc-400">
@@ -97,7 +97,7 @@ function onExploreClick() {
 
         <!-- SERVICES block -->
         <div class="hidden md:block text-left space-y-0.5">
-          <span class="text-xs font-condensed font-bold tracking-wider text-white uppercase">SERVICES</span>
+          <span class="text-xs font-display font-bold tracking-wider text-white uppercase">SERVICES</span>
           <p class="text-[11px] font-mono text-zinc-400">
             Coordinates: 51.5074 N, 0.1278 W | London
           </p>
