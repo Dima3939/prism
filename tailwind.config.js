@@ -4,15 +4,15 @@ export default {
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
         void: {
           950: '#06070B',
-          900: '#08080C',
-          800: '#0E1017',
-          700: '#151722',
-          600: '#1F2232',
+          900: '#0D0E15',
+          800: '#141622',
+          700: '#1D202D'
         },
         prism: {
           cyan: '#00F0FF',
@@ -22,20 +22,19 @@ export default {
           electric: '#4D6BFE'
         },
         hud: {
-          border: 'rgba(255, 255, 255, 0.08)',
-          glass: 'rgba(14, 16, 23, 0.65)',
-          text: '#9496A1'
+          text: '#9496A1',
+          muted: '#525462',
+          border: 'rgba(255, 255, 255, 0.08)'
         }
       },
       fontFamily: {
-        condensed: ['Anton', 'Syne', 'sans-serif'],
-        display: ['Syne', 'sans-serif'],
-        mono: ['"Space Grotesk"', '"JetBrains Mono"', 'monospace'],
-        body: ['Inter', '"Plus Jakarta Sans"', 'sans-serif']
+        display: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['"Space Grotesk"', 'monospace'],
+        body: ['Inter', 'system-ui', 'sans-serif']
       },
       animation: {
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'spin-slow': 'spin 20s linear infinite',
+        'pulse-glow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       }
     },
   },
