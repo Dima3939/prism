@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="prismGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="50%" stop-color="#FF2E93" />
+      <stop offset="100%" stop-color="#FFD166" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect width="100" height="100" rx="24" fill="#06070B" />
+  <path d="M50 16 L84 76 L16 76 Z" stroke="url(#prismGrad)" stroke-width="5" stroke-linejoin="round" fill="rgba(255, 46, 147, 0.12)" filter="url(#glow)" />
+  <circle cx="50" cy="54" r="7" fill="#00F0FF" />
+</svg>

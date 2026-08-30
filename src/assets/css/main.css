@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #06070B;
+  --bg-secondary: #0D0E15;
+  --bg-glass: rgba(13, 14, 21, 0.75);
+  
+  --prism-cyan: #00F0FF;
+  --prism-magenta: #FF2E93;
+  --prism-violet: #7B2CBF;
+  --prism-gold: #FFD166;
+  --prism-electric: #4D6BFE;
+
+  --text-primary: #F4F4F7;
+  --text-secondary: #9496A1;
+  --text-muted: #525462;
+
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-glow: rgba(0, 240, 255, 0.4);
+}
+
+/* 3D WebGL Canvas Layer (Floats in FRONT of typography, behind UI controls) */
+#webgl-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 15;
+}
+
+/* Typography & Visual Backdrop Layer */
+.backdrop-layer {
+  position: relative;
+  z-index: 5;
+}
+
+/* Interactive Content Layer (Navbar, Buttons, Modals) */
+.content-layer {
+  position: relative;
+  z-index: 25;
+}
+
+/* Subtle Film Grain */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Glassmorphism Panels */
+.glass-panel {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+}
+
+.glass-panel:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Hide Default Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #06070B;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1D202D;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00F0FF;
+}
+
+/* Lenis Recommended CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
