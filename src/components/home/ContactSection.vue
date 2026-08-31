@@ -51,6 +51,18 @@ function resetForm() {
   form.email = ''
   form.message = ''
 }
+
+function setCustomScope(scope: { service: string; budget: string; summary: string }) {
+  if (serviceOptions.includes(scope.service)) {
+    form.service = scope.service
+  }
+  form.budget = scope.budget
+  form.message = scope.summary
+}
+
+defineExpose({
+  setCustomScope
+})
 </script>
 
 <template>
@@ -106,7 +118,7 @@ function resetForm() {
               class="px-4 py-2.5 text-xs font-mono rounded-full border transition-all cursor-pointer"
               :class="[
                 form.service === service
-                  ? 'bg-prism-cyan/20 border-prism-cyan text-prism-cyan shadow-[0_0_16px_rgba(0,240,255,0.2)]'
+                  ? 'bg-prism-cyan/20 border-prism-cyan text-prism-cyan shadow-[0_0_16px_rgba(0,240,255,0.2)] font-bold'
                   : 'bg-void-900/60 border-white/10 text-hud-text hover:text-white hover:border-white/20'
               ]"
               @click="form.service = service; playClick()"
@@ -131,7 +143,7 @@ function resetForm() {
               class="px-4 py-2.5 text-xs font-mono rounded-full border transition-all cursor-pointer"
               :class="[
                 form.budget === budget
-                  ? 'bg-prism-magenta/20 border-prism-magenta text-prism-magenta shadow-[0_0_16px_rgba(255,46,147,0.2)]'
+                  ? 'bg-prism-magenta/20 border-prism-magenta text-prism-magenta shadow-[0_0_16px_rgba(255,46,147,0.2)] font-bold'
                   : 'bg-void-900/60 border-white/10 text-hud-text hover:text-white hover:border-white/20'
               ]"
               @click="form.budget = budget; playClick()"

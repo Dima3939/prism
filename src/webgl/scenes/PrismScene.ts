@@ -2,7 +2,10 @@ import * as THREE from 'three'
 import prismVert from '../shaders/prism.vert.glsl'
 import prismFrag from '../shaders/prism.frag.glsl'
 
+export type PrismShape = 'icosahedron' | 'torusKnot' | 'octahedron' | 'dodecahedron'
+
 export interface PrismLabConfig {
+  shape: PrismShape
   dispersion: number
   roughness: number
   transmission: number
@@ -24,6 +27,7 @@ export class PrismScene {
   private edgeLinesMaterial!: THREE.LineBasicMaterial
 
   public config: PrismLabConfig = {
+    shape: 'icosahedron',
     dispersion: 1.0,
     roughness: 0.08,
     transmission: 0.82,
@@ -40,9 +44,29 @@ export class PrismScene {
     this.initParticles()
   }
 
+  private createGeometry(shape: PrismShape): THREE.BufferGeometry {
+    let geo: THREE.BufferGeometry
+    switch (shape) {
+      case 'torusKnot':
+        geo = new THREE.TorusKnotGeometry(1.0, 0.38, 64, 16, 2, 3).toNonIndexed()
+        break
+      case 'octahedron':
+        geo = new THREE.OctahedronGeometry(1.65, 0).toNonIndexed()
+        break
+      case 'dodecahedron':
+        geo = new THREE.DodecahedronGeometry(1.5, 0).toNonIndexed()
+        break
+      case 'icosahedron':
+      default:
+        geo = new THREE.IcosahedronGeometry(1.6, 0).toNonIndexed()
+        break
+    }
+    geo.computeVertexNormals()
+    return geo
+  }
+
   private initDualPassCrystal() {
-    const geometry = new THREE.IcosahedronGeometry(1.6, 0).toNonIndexed()
-    geometry.computeVertexNormals()
+    const geometry = this.createGeometry(this.config.shape)
 
     // 1. Back Faces Material
     this.backMaterial = new THREE.ShaderMaterial({
@@ -92,8 +116,7 @@ export class PrismScene {
   }
 
   private initEdgeLines() {
-    // Subtle, elegant facet lines
-    const wireGeo = new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(1.604, 0))
+    const wireGeo = new THREE.WireframeGeometry(this.createGeometry(this.config.shape))
     this.edgeLinesMaterial = new THREE.LineBasicMaterial({
       color: 0x00F0FF,
       transparent: true,
@@ -105,8 +128,22 @@ export class PrismScene {
     this.group.add(this.edgeLinesMesh)
   }
 
+  public setShape(shape: PrismShape) {
+    this.config.shape = shape
+
+    // Dispose old geometries
+    this.frontMesh.geometry.dispose()
+    this.edgeLinesMesh.geometry.dispose()
+
+    const newGeo = this.createGeometry(shape)
+    this.frontMesh.geometry = newGeo
+    this.backMesh.geometry = newGeo
+
+    const newWireGeo = new THREE.WireframeGeometry(this.createGeometry(shape))
+    this.edgeLinesMesh.geometry = newWireGeo
+  }
+
   private initCoreFlare() {
-    // Subtle, soft core glow (dimmed)
     const canvas = document.createElement('canvas')
     canvas.width = 128
     canvas.height = 128
@@ -202,6 +239,9 @@ export class PrismScene {
   public setConfig(newConfig: Partial<PrismLabConfig>) {
     Object.assign(this.config, newConfig)
 
+    if (newConfig.shape !== undefined) {
+      this.setShape(newConfig.shape)
+    }
     if (newConfig.dispersion !== undefined) {
       this.frontMaterial.uniforms.uDispersion.value = this.config.dispersion
       this.backMaterial.uniforms.uDispersion.value = this.config.dispersion

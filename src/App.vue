@@ -10,6 +10,7 @@ import AppHeader from './components/layout/AppHeader.vue'
 import AppFooter from './components/layout/AppFooter.vue'
 import CustomCursor from './components/layout/CustomCursor.vue'
 import CaseModal from './components/ui/CaseModal.vue'
+import PerformanceHud from './components/ui/PerformanceHud.vue'
 
 // Home Sections
 import HeroSection from './components/home/HeroSection.vue'
@@ -17,17 +18,21 @@ import ManifestoSection from './components/home/ManifestoSection.vue'
 import ShowcaseSection from './components/home/ShowcaseSection.vue'
 import ShaderLabSection from './components/home/ShaderLabSection.vue'
 import ServicesBento from './components/home/ServicesBento.vue'
+import CostEstimator from './components/home/CostEstimator.vue'
 import ContactSection from './components/home/ContactSection.vue'
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 let webglApp: WebGLApp | null = null
 
-const { initLenis, scrollProgress } = useLenis()
+const { initLenis } = useLenis()
 let destroyLenis: (() => void) | undefined
 
 // Modal State
 const selectedProject = ref<ProjectCase | null>(null)
 const isModalOpen = ref(false)
+
+// Contact Form Ref
+const contactSectionRef = ref<InstanceType<typeof ContactSection> | null>(null)
 
 function openProjectModal(project: ProjectCase) {
   selectedProject.value = project
@@ -41,6 +46,12 @@ function closeProjectModal() {
 function onUpdateLabConfig(config: Partial<PrismLabConfig>) {
   if (webglApp) {
     webglApp.updateLabConfig(config)
+  }
+}
+
+function onInjectScope(scope: { service: string; budget: string; summary: string }) {
+  if (contactSectionRef.value) {
+    contactSectionRef.value.setCustomScope(scope)
   }
 }
 
@@ -91,23 +102,29 @@ onUnmounted(() => {
       <!-- Manifesto & Metrics -->
       <ManifestoSection />
 
-      <!-- Horizontal Pinned Showcase Gallery -->
+      <!-- Horizontal Pinned Showcase Gallery with Category Filter & Liquid Hover -->
       <ShowcaseSection @select-project="openProjectModal" />
 
-      <!-- Interactive 3D Shader Sandbox Lab -->
+      <!-- Interactive 3D Shader Sandbox Lab with 4 Geometry Shapes -->
       <ShaderLabSection @update-config="onUpdateLabConfig" />
 
       <!-- Capabilities & Bento Services Grid -->
       <ServicesBento />
 
+      <!-- Interactive Project Cost & Scope Estimator -->
+      <CostEstimator @inject-scope="onInjectScope" />
+
       <!-- High-Conversion Project Inquiry Form -->
-      <ContactSection />
+      <ContactSection ref="contactSectionRef" />
     </main>
 
-    <!-- 6. Kinetic Ticker Footer -->
+    <!-- 6. Retro-Futuristic Performance Diagnostics HUD -->
+    <PerformanceHud />
+
+    <!-- 7. Kinetic Ticker Footer -->
     <AppFooter />
 
-    <!-- 7. Deep-Dive Case Study Modal -->
+    <!-- 8. Deep-Dive Case Study Modal -->
     <CaseModal
       :is-open="isModalOpen"
       :project="selectedProject"
